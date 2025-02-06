@@ -66,7 +66,7 @@ export default function Header() {
                       <Link href="/profile" className="relative border-2 border-[#286672] text-[#286672] hover:bg-[#286672]/10 px-6 py-2.5 rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-[#286672]/20 group overflow-hidden">
                         <span className="relative font-medium">Profile</span>
                       </Link>
-                      <Link href="/jobs" className="relative bg-[#286672] text-white px-6 py-2.5 rounded-xl hover:bg-[#1d4d5a] transition-all duration-300 hover:shadow-lg hover:shadow-[#286672]/20 group overflow-hidden">
+                      <Link href="/careers" className="relative bg-[#286672] text-white px-6 py-2.5 rounded-xl hover:bg-[#1d4d5a] transition-all duration-300 hover:shadow-lg hover:shadow-[#286672]/20 group overflow-hidden">
                         <span className="relative font-medium">Job Apply</span>
                       </Link>
                     </>

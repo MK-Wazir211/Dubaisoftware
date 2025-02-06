@@ -1,6 +1,10 @@
 'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { setDoc, doc } from 'firebase/firestore';
+import { auth, db } from '@/lib/firebase';
+
 
 interface RegisterProps {
   onClose: () => void;
@@ -35,12 +39,22 @@ export default function Register({ onClose }: RegisterProps) {
     }
 
     try {
-      // Simulated API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      await setDoc(doc(db, 'users', user.uid), {
+        name,
+        email,
+        userType,
+        agreeTerms,
+        createdAt: new Date(),
+      });
+
       setMessage('Registration successful! Redirecting...');
-      // Add actual registration logic here
-    } catch (error) {
-      setMessage('Error: Registration failed. Please try again.');
+      setTimeout(onClose, 2000);
+    } catch (error: any) {
+      console.error("Error registering user:", error);
+      setMessage(`Error: ${error.message.split('/')[1]?.replace(').', '') || 'Registration failed'}`);
     } finally {
       setIsLoading(false);
     }
