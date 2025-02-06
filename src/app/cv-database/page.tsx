@@ -100,7 +100,7 @@ export default function CVDatabase() {
             <CandidateCard
               key={candidate.id}
               candidate={candidate}
-              onViewDetails={() => setSelectedCandidate(candidate)}
+              onViewDetails={() => window.location.href = `/cv-database/${candidate.id}`}
             />
           ))}
         </div>
