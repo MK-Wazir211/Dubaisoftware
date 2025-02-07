@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { config, library } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Login from '../auth/login';
 
 import Register from '../auth/register';
@@ -14,12 +14,53 @@ config.autoAddCss = false;
 library.add(faUser);
 
 export default function Header() {
-  const [userAuth, setUserAuth] = useState({
+  const [userAuth, setUserAuth] = useState<{ 
+    isLoggedIn: boolean; 
+    userType: string | null 
+  }>({ 
     isLoggedIn: false,
-    userType: null // 'applicant' or 'client'
-  }); // Replace with actual authentication logic
+    userType: null
+  });
+  
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
+
+  useEffect(() => {
+    const checkAuthStatus = () => {
+      const user = JSON.parse(localStorage.getItem('user') || 'null');
+      if (user) {
+        setUserAuth({
+          isLoggedIn: true,
+          userType: user.userType
+        });
+      }
+    };
+
+    checkAuthStatus();
+
+    window.addEventListener('storage', checkAuthStatus);
+    return () => window.removeEventListener('storage', checkAuthStatus);
+  }, []);
+
+  const handleLoginSuccess = (userData: any) => {
+    localStorage.setItem('user', JSON.stringify({
+      isLoggedIn: true,
+      userType: userData.userType
+    }));
+    setUserAuth({
+      isLoggedIn: true,
+      userType: userData.userType
+    });
+    setShowLogin(false);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    setUserAuth({
+      isLoggedIn: false,
+      userType: null
+    });
+  };
 
   return (
     <>
@@ -63,9 +104,24 @@ export default function Header() {
                 <>
                   {userAuth.userType === 'applicant' && (
                     <>
-                      <Link href="/profile" className="relative border-2 border-[#286672] text-[#286672] hover:bg-[#286672]/10 px-6 py-2.5 rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-[#286672]/20 group overflow-hidden">
-                        <span className="relative font-medium">Profile</span>
-                      </Link>
+                      <div className="relative group">
+                        <Link 
+                          href="/profile" 
+                          className="w-12 h-12 rounded-full overflow-hidden border-2 border-[#286672] hover:border-[#1d4d5a] transition-all duration-300"
+                        >
+                          <img 
+                            src={JSON.parse(localStorage.getItem('user') || '{}')?.photo || '/default-avatar.png'} 
+                            alt="Profile" 
+                            className="w-full h-full object-cover"
+                          />
+                        </Link>
+                        <button 
+                          onClick={handleLogout}
+                          className="absolute hidden group-hover:block top-14 right-0 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-all duration-300 shadow-lg"
+                        >
+                          Logout
+                        </button>
+                      </div>
                       <Link href="/careers" className="relative bg-[#286672] text-white px-6 py-2.5 rounded-xl hover:bg-[#1d4d5a] transition-all duration-300 hover:shadow-lg hover:shadow-[#286672]/20 group overflow-hidden">
                         <span className="relative font-medium">Job Apply</span>
                       </Link>
@@ -103,7 +159,10 @@ export default function Header() {
 
       {showLogin && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50">
-          <Login onClose={() => setShowLogin(false)} />
+          <Login 
+            onClose={() => setShowLogin(false)}
+            onSuccess={handleLoginSuccess}
+          />
         </div>
       )}
 

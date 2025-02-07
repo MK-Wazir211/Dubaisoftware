@@ -6,9 +6,10 @@ import Register from '../auth/register';
 interface LoginProps {
   onClose: () => void;
   onSwitchToRegister?: () => void;
+  onSuccess?: (userData: any) => void;
 }
 
-export default function Login({ onClose }: LoginProps) {
+export default function Login({ onClose, onSuccess }: LoginProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -25,6 +26,7 @@ export default function Login({ onClose }: LoginProps) {
     try {
       await new Promise(resolve => setTimeout(resolve, 1000));
       setMessage('Login successful! Redirecting...');
+      onSuccess?.({ userType });
     } catch (error) {
       setMessage('Error: Invalid credentials or server error');
     } finally {
