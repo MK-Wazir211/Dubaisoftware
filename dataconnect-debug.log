@@ -1,0 +1,10 @@
+I0207 12:22:22.488088   16464 load.go:37] Reloading schema and connectors...
+I0207 12:22:22.534633   16464 control.go:59] [/emulator/dss c23c] UpdateResources(): done
+Schema: sources: schema\schema.gql [1384B] 
+Connector "default": sources: connector\mutations.gql [1163B] connector\queries.gql [1855B] 
+I0207 12:22:22.569576   16464 codegen.go:82] [connector "default" javascriptSdk] Generating sources into "C:\\Users\\muzda\\Desktop\\web\\DSS\\dataconnect-generated\\js\\default-connector"
+I0207 12:22:22.575133   16464 collector.go:107] schema extensions wrote into "C:\\Users\\muzda\\Desktop\\web\\DSS\\dataconnect\\.dataconnect\\schema"
+Generated sources: prelude.gql [65151B] 
+I0207 12:22:22.582231   16464 collector.go:107] connector "default" javascriptSdk wrote into "C:\\Users\\muzda\\Desktop\\web\\DSS\\dataconnect-generated\\js\\default-connector"
+Generated sources: index.d.ts [261B] esm\package.json [17B] package.json [836B] README.md [2740B] react\package.json [468B] react\esm\index.esm.js [93B] esm\index.esm.js [162B] index.cjs.js [203B] react\index.d.ts [128B] react\esm\package.json [17B] react\index.cjs.js [102B] 
+I0207 12:22:22.673377   16464 installsdk.go:76] Running command: C:\Program Files\nodejs\npm.cmd install file:dataconnect-generated\js\default-connector

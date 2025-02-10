@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Pagination from '../components/pagination';
 
+
 const jobs = [
   {
     id: 1,

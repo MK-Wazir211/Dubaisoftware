@@ -1,7 +1,8 @@
 'use client';
 import React, { useState } from 'react';
-import Forget from '../auth/forget';
-import Register from '../auth/register';
+import Forget from '../Auth/forget';
+import Register from '../Auth/register';
+
 
 interface LoginProps {
   onClose: () => void;

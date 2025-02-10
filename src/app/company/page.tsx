@@ -1,6 +1,11 @@
+'use client'
+import { useState } from 'react';
+
 export default function CompanyPage() {
+  const [showRegister, setShowRegister] = useState(false);
   return (
       <main className="flex min-h-screen flex-col items-center bg-gradient-to-b from-[#f0f4f5] to-white">
+
           <div className="relative w-full">
               <img 
                   src="https://imagedelivery.net/P3Dzecn-jTdvXXgWWrFQig/183859a6-709c-4705-8f69-461d6ca99200/desktop" 
@@ -142,7 +147,7 @@ export default function CompanyPage() {
                       <p className="text-lg sm:text-xl opacity-90 mb-10 sm:mb-12 leading-relaxed">
                           Experience a culture of innovation, competitive compensation, and endless opportunities for growth.
                       </p>
-                      <a href="/careers" className="bg-white text-[#286672] px-8 py-4 sm:px-10 sm:py-5 rounded-full font-bold text-lg sm:text-xl hover:bg-opacity-90 transition-colors duration-300 inline-block relative z-10">
+                      <a href="/Careers" className="bg-white text-[#286672] px-8 py-4 sm:px-10 sm:py-5 rounded-full font-bold text-lg sm:text-xl hover:bg-opacity-90 transition-colors duration-300 inline-block relative z-10">
                           Apply Now
                       </a>
                   </div>
@@ -151,6 +156,7 @@ export default function CompanyPage() {
                           <path d="M600,0C268.62915,0,0,268.62915,0,600s268.62915,600,600,600s600-268.62915,600-600S931.37085,0,600,0z M600,1000C358.52264,1000,200,841.47736,200,600S358.52264,200,600,200s400,158.52264,400,400S841.47736,1000,600,1000z"/>
                           <path d="M600,400c-110.45695,0-200,89.54305-200,200s89.54305,200,200,200s200-89.54305,200-200S710.45695,400,600,400z M600,700c-55.22847,0-100-44.77153-100-100s44.77153-100,100-100s100,44.77153,100,100S655.22847,700,600,700z"/>
                       </svg>
+                      
                   </div>
               </section>
           </section>
